@@ -1,4 +1,4 @@
-const cloud = require("../startUp/cloudinary");
+const cloud = require("../startup/cloudinary");
 const fs = require("fs");
 
 exports.getAll = (Model) => async (req, res, next) => {
