@@ -1,8 +1,10 @@
 require("dotenv").config();
 const bcrypt = require("bcrypt");
+const helmet = require("helmet");
 const { User } = require("./models/userModel");
 const app = require("express")();
 
+app.use(helmet());
 require("./startUp/DB")();
 require("./startUp/routes")(app);
 
