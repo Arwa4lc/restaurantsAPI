@@ -16,8 +16,8 @@ app.listen(port, async () => {
 
     user = await User({
       name: "Arwa abdelrahem",
-      email: "arwaabdelrahem22@gmail.com",
-      password: await bcrypt.hash("1907%^a", 12),
+      email: process.env.USER_EMAIL,
+      password: await bcrypt.hash(process.env.USER_PASSWORD, 12),
       role: "admin",
     }).save();
     console.log("Admin created");
