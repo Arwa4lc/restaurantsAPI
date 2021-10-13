@@ -57,7 +57,7 @@ exports.search = async (req, res, next) => {
         name: req.query.name == "" ? /^$|/ : Regex,
       });
     }
-    if (restaurant.length === 0)
+    if (!restaurant || restaurant.length === 0)
       return res.status(400).send("No results found");
 
     res.status(200).send(restaurant);
