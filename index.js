@@ -5,8 +5,8 @@ const { User } = require("./models/userModel");
 const app = require("express")();
 
 app.use(helmet());
-require("./startUp/DB")();
-require("./startUp/routes")(app);
+require("./startup/DB")();
+require("./startup/routes")(app);
 
 const port = process.env.PORT || 3000;
 app.listen(port, async () => {
