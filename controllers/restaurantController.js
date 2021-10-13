@@ -51,13 +51,14 @@ exports.search = async (req, res, next) => {
   try {
     let restaurant;
     if (req.query.name) {
-      const text = req.query.name;
+      const text = `^${req.query.name}`;
       const Regex = new RegExp(text);
-      restaurant = await Restaurant.findOne({
+      restaurant = await Restaurant.find({
         name: req.query.name == "" ? /^$|/ : Regex,
       });
     }
-    if (!restaurant) return res.status(400).send("No results found");
+    if (restaurant.length === 0)
+      return res.status(400).send("No results found");
 
     res.status(200).send(restaurant);
   } catch (error) {
