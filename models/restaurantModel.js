@@ -62,3 +62,37 @@ restaurantSchema.index({ location: "2dsphere" });
 const Restaurant = mongoose.model("Restaurant", restaurantSchema);
 
 exports.Restaurant = Restaurant;
+
+/**
+ * @swagger
+ * definitions:
+ *  Restaurant:
+ *    type: object
+ *    properties:
+ *      name:
+ *        type: string
+ *        description: Restaurant name
+ *        example: "Melodies Restaurant"
+ *      email:
+ *        type: string
+ *        description: Restaurant's email address
+ *        example: "melodies@example.com"
+ *      image:
+ *        type: string
+ *        description: Restaurant's image
+ *      city:
+ *        type: number
+ *        description: city_id
+ *        example: "2"
+ *      location:
+ *        type: object
+ *        properties:
+ *          type:
+ *            type: string
+ *            description: geospatial type
+ *            example: "Point"
+ *          coordinates:
+ *            type: [number]
+ *            description: Restaurant coordinates
+ *            example: [32.2858438,30.5858442]
+ */

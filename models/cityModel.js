@@ -35,3 +35,14 @@ const City = mongoose.model("City", citySchema);
 
 exports.City = City;
 exports.validate = bodyValidation;
+
+/**
+ * @swagger
+ * definitions:
+ *  City:
+ *    type: object
+ *    properties:
+ *      name:
+ *        type: string
+ *        example: "Ismailia"
+ */
