@@ -86,3 +86,26 @@ const User = mongoose.model("User", userSchema);
 exports.User = User;
 exports.signUpValidation = signUp;
 exports.logInValidation = logIn;
+
+/**
+ * @swagger
+ * definitions:
+ *  User:
+ *    type: object
+ *    properties:
+ *        name:
+ *          type: string
+ *          example: "Arwa Abdelrahem"
+ *        email:
+ *          type: string
+ *          description: user's email address
+ *          example: "arwaabdelrahem@example.com"
+ *        password:
+ *          type: string
+ *          description: user's password
+ *          example: "s3dhu#mwfx$vgu8"
+ *        role:
+ *          type: string
+ *          description: user's role
+ *          example: "admin"
+ */
