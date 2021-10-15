@@ -10,6 +10,8 @@ module.exports = router;
  * @swagger
  * /users/auth/register:
  *  post:
+ *   tags:
+ *     - Auth
  *   summary: create new user account
  *   description: create new user account
  *   requestBody:
@@ -25,6 +27,8 @@ module.exports = router;
  *
  * /users/auth/login:
  *  post:
+ *   tags:
+ *     - Auth
  *   summary: user login
  *   description: user login
  *   requestBody:

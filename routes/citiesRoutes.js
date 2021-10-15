@@ -16,6 +16,8 @@ module.exports = router;
  * @swagger
  * /cities:
  *  get:
+ *   tags:
+ *     - city
  *   summary: get all cities
  *   description: get all cities
  *   responses:
@@ -23,6 +25,8 @@ module.exports = router;
  *        description: success
  *
  *  post:
+ *   tags:
+ *     - city
  *   summary: create new city
  *   description: create new city
  *   parameters:
@@ -46,6 +50,8 @@ module.exports = router;
  *
  * /cities/{id}:
  *  get:
+ *   tags:
+ *     - city
  *   summary: get specific city by id
  *   description: get specific city by id
  *   parameters:
@@ -62,6 +68,8 @@ module.exports = router;
  *        description: city not found
  *
  *  put:
+ *   tags:
+ *     - city
  *   summary: update specific city by id
  *   description: update specific city by id
  *   parameters:
@@ -89,6 +97,8 @@ module.exports = router;
  *        description: city not found
  *
  *  delete:
+ *   tags:
+ *     - city
  *   summary: delete specific city by id
  *   description: delete specific city by id
  *   parameters:

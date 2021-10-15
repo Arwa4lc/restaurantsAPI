@@ -22,6 +22,8 @@ module.exports = router;
  * @swagger
  * /restaurants:
  *  get:
+ *   tags:
+ *     - Restaurant
  *   summary: get all restaurants
  *   description: get all restaurants
  *   responses:
@@ -30,6 +32,8 @@ module.exports = router;
  *
  * /restaurants/search:
  *  get:
+ *   tags:
+ *     - Restaurant
  *   summary: search for restaurants by their names
  *   description: search for restaurants by their names
  *   parameters:
@@ -46,6 +50,8 @@ module.exports = router;
  *
  * /restaurants/nearBy:
  *  get:
+ *   tags:
+ *     - Restaurant
  *   summary: get nearest restaurants by the user location
  *   description: get nearest restaurants by the user location
  *   parameters:
@@ -65,6 +71,8 @@ module.exports = router;
  *
  * /restaurants/statistics:
  *  get:
+ *   tags:
+ *     - Restaurant
  *   summary: get all restaurants grouped by their count in each city
  *   description: get all restaurants grouped by their count in each city
  *   responses:
@@ -73,6 +81,8 @@ module.exports = router;
  *
  * /restaurants/{id}:
  *  get:
+ *   tags:
+ *     - Restaurant
  *   summary: get specific restaurant by id
  *   description: get specific restaurant by id
  *   parameters:
@@ -89,6 +99,8 @@ module.exports = router;
  *        description: restaurant not found
  *
  *  put:
+ *   tags:
+ *     - Restaurant
  *   summary: update specific restaurant by id
  *   description: update specific restaurant by id
  *   consumes:
@@ -141,6 +153,8 @@ module.exports = router;
  *        description: forbidden "only admins can update restaurant"
  *
  *  delete:
+ *   tags:
+ *     - Restaurant
  *   summary: delete specific restaurant by id
  *   description: delete specific restaurant by id
  *   parameters:
@@ -169,6 +183,8 @@ module.exports = router;
  *
  * /restaurants/cities/{cityId}:
  *  post:
+ *   tags:
+ *     - Restaurant
  *   summary: create new restaurant
  *   description: create new restaurant
  *   consumes:
@@ -219,6 +235,4 @@ module.exports = router;
  *        description: unauthorized access, user token must be provided
  *      403:
  *        description: forbidden "only admins can add restaurant"
- *
- *
  */
