@@ -8,7 +8,7 @@ module.exports = router;
 
 /**
  * @swagger
- * /users/auth/register:
+ * /auth/register:
  *  post:
  *   tags:
  *     - Auth
@@ -25,7 +25,7 @@ module.exports = router;
  *      400:
  *        description: failure in creating new user "invalid request body"
  *
- * /users/auth/login:
+ * /auth/login:
  *  post:
  *   tags:
  *     - Auth
