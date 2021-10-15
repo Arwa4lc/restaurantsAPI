@@ -78,12 +78,8 @@ exports.Restaurant = Restaurant;
  *        description: Restaurant's email address
  *        example: "melodies@example.com"
  *      image:
- *        type: string
+ *        type: file
  *        description: Restaurant's image
- *      city:
- *        type: number
- *        description: city_id
- *        example: "2"
  *      location:
  *        type: object
  *        properties:

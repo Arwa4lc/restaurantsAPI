@@ -9,10 +9,10 @@ router.get("/nearBy", restaurantController.nearest);
 router.get("/statistics", restaurantController.statistics);
 router.get("/:id", restaurantController.getRestaurant);
 
+router.use(isAdmin);
 router.use(multer);
 
 router.post("/cities/:cityId", restaurantController.addRestaurant);
-router.use(isAdmin);
 router.put("/:id", restaurantController.editRestaurant);
 router.delete("/:id", restaurantController.deleteRestaurant);
 
@@ -88,54 +88,70 @@ module.exports = router;
  *      404:
  *        description: restaurant not found
  *
- * /restaurants/cities/{cityId}:
- *  post:
- *   summary: create new restaurant
- *   description: create new restaurant
+ *  put:
+ *   summary: update specific restaurant by id
+ *   description: update specific restaurant by id
+ *   consumes:
+ *      - multipart/form-data
  *   parameters:
  *      - in: header
- *        name: authorization
+ *        name: auth-token
  *        required: true
  *        schema:
  *          type: string
- *          format: string
  *      - in: path
- *        name: cityId
+ *        name: id
  *        required: true
  *        schema:
  *          type: integer
- *        description: city id
- *      - in: body
- *        name: body
- *        required: true
- *        description: body object
-
+ *        description: Restaurant id
+ *   requestBody:
+ *    content:
+ *      multipart/form-data:
+ *         schema:
+ *           type: object
+ *           properties:
+ *             name:
+ *               type: string
+ *               description: restaurant name
+ *               example: "melodies"
+ *             email:
+ *               type: string
+ *               description: restaurant email
+ *               example: "melodies@gmail.com"
+ *             image:
+ *               type: file
+ *               description: restaurant image
+ *             lng:
+ *               type: number
+ *               description: restaurant longitude
+ *               example: 32.2813771
+ *             lat:
+ *               type: number
+ *               description: restaurant latitude
+ *               example: 31.2674729
  *   responses:
- *      201:
- *        description: new Restaurant created successfully
- *      400:
- *        description: failure in creating new Restaurant "invalid request body"
+ *      200:
+ *        description: Restaurant updated successfully
+ *      404:
+ *        description: Restaurant with the given ID not found
  *      401:
  *        description: unauthorized access, user token must be provided
  *      403:
- *        description: forbidden "only admins can add restaurant"
+ *        description: forbidden "only admins can update restaurant"
  *
- * /restaurants/{restaurantId}:
- *  put:
- * 
- * /restaurants/{restaurant_id}:
  *  delete:
  *   summary: delete specific restaurant by id
  *   description: delete specific restaurant by id
  *   parameters:
  *      - in: header
- *        name: authorization
+ *        name: auth-token
  *        required: true
  *        schema:
  *          type: string
  *        description: User's access token.
  *      - in: path
- *        name: restaurant_id
+ *        name: id
  *        schema:
  *          type: integer
  *        required: true
@@ -145,8 +161,64 @@ module.exports = router;
  *        description: no content
  *      401:
  *        description: Unauthorized "no token provided"
+ *      403:
+ *        description: forbidden "only admins can delete restaurant"
  *      404:
  *        description: restaurant not found
+ *
+ *
+ * /restaurants/cities/{cityId}:
+ *  post:
+ *   summary: create new restaurant
+ *   description: create new restaurant
+ *   consumes:
+ *      - multipart/form-data
+ *   parameters:
+ *      - in: header
+ *        name: auth-token
+ *        required: true
+ *        schema:
+ *          type: string
+ *      - in: path
+ *        name: cityId
+ *        required: true
+ *        schema:
+ *          type: integer
+ *        description: city id
+ *   requestBody:
+ *    content:
+ *      multipart/form-data:
+ *         schema:
+ *           type: object
+ *           properties:
+ *             name:
+ *               type: string
+ *               description: restaurant name
+ *               example: "melodies"
+ *             email:
+ *               type: string
+ *               description: restaurant email
+ *               example: "melodies@gmail.com"
+ *             image:
+ *               type: file
+ *               description: restaurant image
+ *             lng:
+ *               type: number
+ *               description: restaurant longitude
+ *               example: 32.2813771
+ *             lat:
+ *               type: number
+ *               description: restaurant latitude
+ *               example: 31.2674729
+ *   responses:
+ *      201:
+ *        description: new Restaurant created successfully
+ *      400:
+ *        description: failure in creating new Restaurant "invalid request body"
+ *      401:
+ *        description: unauthorized access, user token must be provided
+ *      403:
+ *        description: forbidden "only admins can add restaurant"
  *
  *
  */
