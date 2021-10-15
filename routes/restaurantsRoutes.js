@@ -3,9 +3,7 @@ const restaurantController = require("../controllers/restaurantController");
 const isAdmin = require("../middlewares/isAdmin");
 const multer = require("../middlewares/multer");
 
-router.get("/", restaurantController.getAllRestaurants);
-router.get("/search", restaurantController.search);
-router.get("/nearBy", restaurantController.nearest);
+router.get("/", restaurantController.getRestaurants);
 router.get("/statistics", restaurantController.statistics);
 router.get("/:id", restaurantController.getRestaurant);
 
@@ -26,6 +24,25 @@ module.exports = router;
  *     - Restaurant
  *   summary: get all restaurants
  *   description: get all restaurants
+ *   parameters:
+ *      - in: query
+ *        name: name
+ *        schema:
+ *          type: string
+ *        description: the name of the restaurant to search for
+ *        example: "euphoria"
+ *      - in: query
+ *        name: longitude
+ *        schema:
+ *          type: number
+ *        description: longitude point of the user location
+ *        example: 32.298118
+ *      - in: query
+ *        name: latitude
+ *        schema:
+ *          type: number
+ *        description: latitude point of the user location
+ *        example: 30.611837
  *   responses:
  *      200:
  *        description: success
@@ -65,11 +82,11 @@ module.exports = router;
  *             image:
  *               type: file
  *               description: restaurant image
- *             lng:
+ *             longitude:
  *               type: number
  *               description: restaurant longitude
  *               example: 32.2813771
- *             lat:
+ *             latitude:
  *               type: number
  *               description: restaurant latitude
  *               example: 31.2674729
@@ -82,45 +99,7 @@ module.exports = router;
  *        description: unauthorized access, user token must be provided
  *      403:
  *        description: forbidden "only admins can add restaurant"
- * /restaurants/search:
- *  get:
- *   tags:
- *     - Restaurant
- *   summary: search for restaurants by their names
- *   description: search for restaurants by their names
- *   parameters:
- *      - in: query
- *        name: name
- *        schema:
- *          type: string
- *        description: the name of the restaurant to search for
- *   responses:
- *      200:
- *        description: success
- *      400:
- *        description: no results found
- *
- * /restaurants/nearBy:
- *  get:
- *   tags:
- *     - Restaurant
- *   summary: get nearest restaurants by the user location
- *   description: get nearest restaurants by the user location
- *   parameters:
- *      - in: query
- *        name: lng
- *        schema:
- *          type: number
- *        description: longitude point of the user location
- *      - in: query
- *        name: lat
- *        schema:
- *          type: number
- *        description: latitude point of the user location
- *   responses:
- *      200:
- *        description: success
- *
+
  * /restaurants/statistics:
  *  get:
  *   tags:
@@ -186,11 +165,11 @@ module.exports = router;
  *             image:
  *               type: file
  *               description: restaurant image
- *             lng:
+ *             longitude:
  *               type: number
  *               description: restaurant longitude
  *               example: 32.2813771
- *             lat:
+ *             latitude:
  *               type: number
  *               description: restaurant latitude
  *               example: 31.2674729

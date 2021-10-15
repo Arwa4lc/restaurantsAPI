@@ -1,20 +1,40 @@
 const { Restaurant } = require("../models/restaurantModel");
 const factory = require("../controllers/handlerFactory");
 
-exports.nearest = async (req, res, next) => {
+exports.getRestaurants = async (req, res, next) => {
   try {
-    let restaurant = await Restaurant.find({
-      location: {
-        $near: {
-          $maxDistance: 1000,
-          $geometry: {
-            type: "Point",
-            coordinates: [req.query.lng, req.query.lat],
+    let restaurant;
+    if (req.query.name) {
+      const text = `^${req.query.name}`;
+      const Regex = new RegExp(text);
+      restaurant = await Restaurant.find({
+        name: req.query.name == "" ? /^$|/ : Regex,
+      });
+      if (!restaurant || restaurant.length === 0)
+        return res.status(400).send("No results found");
+
+      return res.status(200).json(restaurant);
+    }
+
+    if (req.query.longitude && req.query.latitude) {
+      restaurant = await Restaurant.find({
+        location: {
+          $near: {
+            $maxDistance: 1000,
+            $geometry: {
+              type: "Point",
+              coordinates: [req.query.longitude, req.query.latitude],
+            },
           },
         },
-      },
-    });
+      });
+      if (!restaurant || restaurant.length === 0)
+        return res.status(400).send("No results found");
 
+      return res.status(200).json(restaurant);
+    }
+
+    restaurant = await Restaurant.find({});
     res.status(200).send(restaurant);
   } catch (error) {
     next(error);
@@ -47,26 +67,6 @@ exports.statistics = async (req, res, next) => {
   }
 };
 
-exports.search = async (req, res, next) => {
-  try {
-    let restaurant;
-    if (req.query.name) {
-      const text = `^${req.query.name}`;
-      const Regex = new RegExp(text);
-      restaurant = await Restaurant.find({
-        name: req.query.name == "" ? /^$|/ : Regex,
-      });
-    }
-    if (!restaurant || restaurant.length === 0)
-      return res.status(400).send("No results found");
-
-    res.status(200).send(restaurant);
-  } catch (error) {
-    next(error);
-  }
-};
-
-exports.getAllRestaurants = factory.getAll(Restaurant);
 exports.getRestaurant = factory.getOne(Restaurant);
 exports.addRestaurant = factory.addOne(Restaurant);
 exports.editRestaurant = factory.updateOne(Restaurant);
