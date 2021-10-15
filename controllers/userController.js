@@ -8,7 +8,7 @@ const bcrypt = require("bcrypt");
 exports.register = async (req, res, next) => {
   try {
     const { error } = signUpValidation(req.body);
-    if (error) return res.status(400).json(error.details[0].message);
+    if (error) return res.status(400).json(error.message);
 
     let user = await User.findOne({ email: req.body.email });
     if (user)
@@ -26,7 +26,7 @@ exports.register = async (req, res, next) => {
 exports.logIn = async (req, res, next) => {
   try {
     const { error } = logInValidation(req.body);
-    if (error) return res.status(400).json(error.details[0].message);
+    if (error) return res.status(400).json(error.message);
 
     const user = await User.findOne({ email: req.body.email });
     if (!user) return res.status(404).json("Invalid email or password");
