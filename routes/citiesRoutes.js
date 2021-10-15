@@ -23,8 +23,8 @@ module.exports = router;
  *        description: success
  *
  *  post:
- *   summary: create new city account
- *   description: create new city account
+ *   summary: create new city
+ *   description: create new city
  *   parameters:
  *      - in: header
  *        name: auth-token
