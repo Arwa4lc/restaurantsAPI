@@ -51,14 +51,11 @@ module.exports = router;
  *     - Restaurant
  *   summary: create new restaurant
  *   description: create new restaurant
+ *   security:
+ *      - bearerAuth: []
  *   consumes:
  *      - multipart/form-data
  *   parameters:
- *      - in: header
- *        name: auth-token
- *        required: true
- *        schema:
- *          type: string
  *      - in: path
  *        name: cityId
  *        required: true
@@ -134,14 +131,11 @@ module.exports = router;
  *     - Restaurant
  *   summary: update specific restaurant by id
  *   description: update specific restaurant by id
+ *   security:
+ *      - bearerAuth: []
  *   consumes:
  *      - multipart/form-data
  *   parameters:
- *      - in: header
- *        name: auth-token
- *        required: true
- *        schema:
- *          type: string
  *      - in: path
  *        name: id
  *        required: true
@@ -188,13 +182,9 @@ module.exports = router;
  *     - Restaurant
  *   summary: delete specific restaurant by id
  *   description: delete specific restaurant by id
+ *   security:
+ *      - bearerAuth: []
  *   parameters:
- *      - in: header
- *        name: auth-token
- *        required: true
- *        schema:
- *          type: string
- *        description: User's access token.
  *      - in: path
  *        name: id
  *        schema:

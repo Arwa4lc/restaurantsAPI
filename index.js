@@ -14,6 +14,17 @@ const swaggerOptions = {
       version: "1.0.0",
       servers: ["http://localhost:3000/"],
     },
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          name: "authorization",
+          scheme: "bearer",
+          in: "header",
+          bearerFormat: "Bearer",
+        },
+      },
+    },
   },
   apis: [`${__dirname}/models/*.js`, `${__dirname}/routes/*.js`],
 };

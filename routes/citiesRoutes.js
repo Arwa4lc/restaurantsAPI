@@ -29,13 +29,8 @@ module.exports = router;
  *     - city
  *   summary: create new city
  *   description: create new city
- *   parameters:
- *      - in: header
- *        name: auth-token
- *        required: true
- *        schema:
- *          type: string
- *          format: string
+ *   security:
+ *      - bearerAuth: []
  *   requestBody:
  *      content:
  *          application/json:
@@ -46,6 +41,10 @@ module.exports = router;
  *        description: new city created successfully
  *      400:
  *        description: failure in creating new city "invalid request body"
+ *      401:
+ *        description: unauthorized access, user token must be provided
+ *      403:
+ *        description: forbidden "only admins can add city"
  *
  *
  * /cities/{id}:
@@ -72,13 +71,9 @@ module.exports = router;
  *     - city
  *   summary: update specific city by id
  *   description: update specific city by id
+ *   security:
+ *      - bearerAuth: []
  *   parameters:
- *      - in: header
- *        name: auth-token
- *        required: true
- *        schema:
- *          type: string
- *        description: User's access token.
  *      - in: path
  *        name: id
  *        schema:
@@ -101,13 +96,9 @@ module.exports = router;
  *     - city
  *   summary: delete specific city by id
  *   description: delete specific city by id
+ *   security:
+ *      - bearerAuth: []
  *   parameters:
- *      - in: header
- *        name: auth-token
- *        required: true
- *        schema:
- *          type: string
- *        description: User's access token.
  *      - in: path
  *        name: id
  *        schema:
