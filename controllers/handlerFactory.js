@@ -43,10 +43,9 @@ exports.addOne = (Model, validation) => async (req, res, next) => {
         req.body.image = img.image;
       }
 
-      req.body.city = req.params.cityId;
       doc = new Model({
         ...req.body,
-        location: { coordinates: [req.body.lng, req.body.lat] },
+        location: { coordinates: [req.body.longitude, req.body.latitude] },
       });
       await doc.save();
 
@@ -80,8 +79,12 @@ exports.updateOne = (Model) => async (req, res, next) => {
           ...req.body,
           location: {
             coordinates: [
-              req.body.lng ? req.body.lng : doc.location.coordinates[0],
-              req.body.lat ? req.body.lat : doc.location.coordinates[1],
+              req.body.longitude
+                ? req.body.longitude
+                : doc.location.coordinates[0],
+              req.body.latitude
+                ? req.body.latitude
+                : doc.location.coordinates[1],
             ],
           },
         })

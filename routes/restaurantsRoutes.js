@@ -12,7 +12,7 @@ router.get("/:id", restaurantController.getRestaurant);
 router.use(isAdmin);
 router.use(multer);
 
-router.post("/cities/:cityId", restaurantController.addRestaurant);
+router.post("/", restaurantController.addRestaurant);
 router.put("/:id", restaurantController.editRestaurant);
 router.delete("/:id", restaurantController.deleteRestaurant);
 
@@ -29,7 +29,59 @@ module.exports = router;
  *   responses:
  *      200:
  *        description: success
- *
+ *  post:
+ *   tags:
+ *     - Restaurant
+ *   summary: create new restaurant
+ *   description: create new restaurant
+ *   consumes:
+ *      - multipart/form-data
+ *   parameters:
+ *      - in: header
+ *        name: auth-token
+ *        required: true
+ *        schema:
+ *          type: string
+ *      - in: path
+ *        name: cityId
+ *        required: true
+ *        schema:
+ *          type: integer
+ *        description: city id
+ *   requestBody:
+ *    content:
+ *      multipart/form-data:
+ *         schema:
+ *           type: object
+ *           properties:
+ *             name:
+ *               type: string
+ *               description: restaurant name
+ *               example: "melodies"
+ *             email:
+ *               type: string
+ *               description: restaurant email
+ *               example: "melodies@gmail.com"
+ *             image:
+ *               type: file
+ *               description: restaurant image
+ *             lng:
+ *               type: number
+ *               description: restaurant longitude
+ *               example: 32.2813771
+ *             lat:
+ *               type: number
+ *               description: restaurant latitude
+ *               example: 31.2674729
+ *   responses:
+ *      201:
+ *        description: new Restaurant created successfully
+ *      400:
+ *        description: failure in creating new Restaurant "invalid request body"
+ *      401:
+ *        description: unauthorized access, user token must be provided
+ *      403:
+ *        description: forbidden "only admins can add restaurant"
  * /restaurants/search:
  *  get:
  *   tags:
@@ -180,59 +232,5 @@ module.exports = router;
  *      404:
  *        description: restaurant not found
  *
- *
- * /restaurants/cities/{cityId}:
- *  post:
- *   tags:
- *     - Restaurant
- *   summary: create new restaurant
- *   description: create new restaurant
- *   consumes:
- *      - multipart/form-data
- *   parameters:
- *      - in: header
- *        name: auth-token
- *        required: true
- *        schema:
- *          type: string
- *      - in: path
- *        name: cityId
- *        required: true
- *        schema:
- *          type: integer
- *        description: city id
- *   requestBody:
- *    content:
- *      multipart/form-data:
- *         schema:
- *           type: object
- *           properties:
- *             name:
- *               type: string
- *               description: restaurant name
- *               example: "melodies"
- *             email:
- *               type: string
- *               description: restaurant email
- *               example: "melodies@gmail.com"
- *             image:
- *               type: file
- *               description: restaurant image
- *             lng:
- *               type: number
- *               description: restaurant longitude
- *               example: 32.2813771
- *             lat:
- *               type: number
- *               description: restaurant latitude
- *               example: 31.2674729
- *   responses:
- *      201:
- *        description: new Restaurant created successfully
- *      400:
- *        description: failure in creating new Restaurant "invalid request body"
- *      401:
- *        description: unauthorized access, user token must be provided
- *      403:
- *        description: forbidden "only admins can add restaurant"
+
  */
