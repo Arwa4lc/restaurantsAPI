@@ -14,6 +14,7 @@ exports.register = async (req, res, next) => {
     if (user)
       return res.status(400).json("User with the same email already exits!!");
 
+    delete req.body.role;
     req.body.password = await bcrypt.hash(req.body.password, 12);
     user = await User(req.body).save();
 
@@ -29,7 +30,7 @@ exports.logIn = async (req, res, next) => {
     if (error) return res.status(400).json(error.message);
 
     const user = await User.findOne({ email: req.body.email });
-    if (!user) return res.status(404).json("Invalid email or password");
+    if (!user) return res.status(401).json("Invalid email or password");
 
     const compare = await bcrypt.compare(req.body.password, user.password);
     if (!compare) return res.status(401).json("Invalid email or password");
