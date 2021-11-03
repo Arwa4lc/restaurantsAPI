@@ -33,6 +33,10 @@ const userSchema = mongoose.Schema({
     default: "user",
     enum: ["admin", "user"],
   },
+  isAdmin: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 userSchema.set("toJSON", {

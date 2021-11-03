@@ -34,6 +34,28 @@ exports.getRestaurants = async (req, res, next) => {
       return res.status(200).json(restaurant);
     }
 
+    if (req.query.tags) {
+      let query = req.query.tags.split(",");
+
+      restaurant = await Restaurant.aggregate([
+        { $unwind: "$tags" },
+        { $match: { tags: { $in: [...query] } } },
+        {
+          $group: {
+            _id: "$name",
+            email: { $first: "$email" },
+            city: { $first: "$city" },
+            tags: { $first: "$tags" },
+            location: { $first: "$location" },
+            noOfMatches: { $sum: 1 },
+          },
+        },
+        { $sort: { noOfMatches: -1 } },
+      ]);
+
+      return res.status(200).json(restaurant);
+    }
+
     restaurant = await Restaurant.find({});
     res.status(200).send(restaurant);
   } catch (error) {

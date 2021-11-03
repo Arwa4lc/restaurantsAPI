@@ -24,6 +24,9 @@ exports.getOne = (Model) => async (req, res, next) => {
 
 exports.addOne = (Model, validation) => async (req, res, next) => {
   try {
+    console.log(req.body);
+    console.log(Array.from(req.body.tags));
+    console.log(req.files);
     if (validation) {
       const { error } = validation(req.body);
       if (error) return res.status(400).json(error.details[0].message);
@@ -37,11 +40,11 @@ exports.addOne = (Model, validation) => async (req, res, next) => {
           .status(400)
           .json("Document with the same email already exists");
 
-      let img;
-      if (req.files.length !== 0) {
-        img = await cloud.cloudUpload(req.files[0].path);
-        req.body.image = img.image;
-      }
+      // let img;
+      // if (req.files.length !== 0) {
+      //   img = await cloud.cloudUpload(req.files[0].path);
+      //   req.body.image = img.image;
+      // }
 
       doc = new Model({
         ...req.body,
@@ -49,7 +52,7 @@ exports.addOne = (Model, validation) => async (req, res, next) => {
       });
       await doc.save();
 
-      if (req.files.length !== 0) fs.unlinkSync(req.files[0].path);
+      // if (req.files.length !== 0) fs.unlinkSync(req.files[0].path);
       return res.status(201).json(doc);
     }
 

@@ -7,15 +7,16 @@ const bcrypt = require("bcrypt");
 
 exports.register = async (req, res, next) => {
   try {
-    const { error } = signUpValidation(req.body);
-    if (error) return res.status(400).json(error.message);
+    // const { error } = signUpValidation(req.body);
+    // if (error) return res.status(400).json(error.message);
 
     let user = await User.findOne({ email: req.body.email });
     if (user)
       return res.status(400).json("User with the same email already exits!!");
 
+    console.log(req.body.password);
     delete req.body.role;
-    req.body.password = await bcrypt.hash(req.body.password, 12);
+    // req.body.password = await bcrypt.hash(req.body.password, 12);
     user = await User(req.body).save();
 
     res.status(201).json(user);
@@ -44,3 +45,11 @@ exports.logIn = async (req, res, next) => {
     next(error);
   }
 };
+
+// exports.logIn = async (req, res, next) => {
+//   try {
+//    const
+//   } catch (error) {
+//     next(error);
+//   }
+// };

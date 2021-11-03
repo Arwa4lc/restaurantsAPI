@@ -23,6 +23,11 @@ const restaurantSchema = mongoose.Schema({
     ref: "City",
     required: true,
   },
+  tags: [
+    {
+      type: String,
+    },
+  ],
   location: {
     type: {
       type: String,
@@ -48,6 +53,7 @@ restaurantSchema.set("toJSON", {
       email: doc.email,
       image: doc.image,
       city: doc.city,
+      tags: doc.tags,
       location: doc.location,
     };
   },

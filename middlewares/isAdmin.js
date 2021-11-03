@@ -8,7 +8,6 @@ module.exports = async function (req, res, next) {
   }
   if (!token) return res.status(401).json("Access denied. No token provided");
 
-  console.log(token);
   try {
     const decode = jwt.verify(token, process.env.JWT_SECRET_KEY);
 
