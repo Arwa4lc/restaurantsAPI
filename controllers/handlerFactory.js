@@ -24,9 +24,6 @@ exports.getOne = (Model) => async (req, res, next) => {
 
 exports.addOne = (Model, validation) => async (req, res, next) => {
   try {
-    console.log(req.body);
-    console.log(Array.from(req.body.tags));
-    console.log(req.files);
     if (validation) {
       const { error } = validation(req.body);
       if (error) return res.status(400).json(error.details[0].message);

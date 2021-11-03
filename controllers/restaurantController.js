@@ -39,7 +39,7 @@ exports.getRestaurants = async (req, res, next) => {
 
       restaurant = await Restaurant.aggregate([
         { $unwind: "$tags" },
-        { $match: { tags: { $in: [...query] } } },
+        { $match: { tags: { $in: query } } },
         {
           $group: {
             _id: "$name",
@@ -52,6 +52,8 @@ exports.getRestaurants = async (req, res, next) => {
         },
         { $sort: { noOfMatches: -1 } },
       ]);
+      if (!restaurant || restaurant.length === 0)
+        return res.status(400).send("No results found");
 
       return res.status(200).json(restaurant);
     }
