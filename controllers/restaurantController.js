@@ -38,6 +38,7 @@ exports.getRestaurants = async (req, res, next) => {
       let query = req.query.tags.split(",");
 
       restaurant = await Restaurant.aggregate([
+        { $addFields: { restaurantTags: "$tags" } },
         { $unwind: "$tags" },
         { $match: { tags: { $in: query } } },
         {
@@ -45,10 +46,13 @@ exports.getRestaurants = async (req, res, next) => {
             _id: "$name",
             email: { $first: "$email" },
             city: { $first: "$city" },
-            tags: { $first: "$tags" },
+            tags: { $first: "$restaurantTags" },
             location: { $first: "$location" },
             noOfMatches: { $sum: 1 },
           },
+        },
+        {
+          $unset: ["noOfMatches"],
         },
         { $sort: { noOfMatches: -1 } },
       ]);

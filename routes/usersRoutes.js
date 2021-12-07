@@ -3,6 +3,7 @@ const userController = require("../controllers/userController");
 
 router.post("/auth/signUp", userController.register);
 router.post("/auth/signIn", userController.logIn);
+router.post("/auth/makeAdmin", userController.makeAdmin);
 
 module.exports = router;
 
@@ -46,7 +47,7 @@ module.exports = router;
  *                      description: user's password
  *                      example: "s3dhu#mwfx$vgu8"
  *   responses:
- *      201:
+ *      200:
  *        description: logged in successfully
  *      400,401,404:
  *        description: invalid email or password

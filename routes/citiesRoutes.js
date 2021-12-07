@@ -7,8 +7,9 @@ router.get("/:id", cityController.getCity);
 
 router.use(isAdmin);
 router.post("/", cityController.addCity);
-router.put("/:id", cityController.editCity);
+router.patch("/:id", cityController.editCity);
 router.delete("/:id", cityController.deleteCity);
+router.delete("/deleteWithSession/:id", cityController.deleteWithSession);
 
 module.exports = router;
 

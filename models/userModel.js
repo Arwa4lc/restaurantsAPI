@@ -33,10 +33,6 @@ const userSchema = mongoose.Schema({
     default: "user",
     enum: ["admin", "user"],
   },
-  isAdmin: {
-    type: Boolean,
-    default: false,
-  },
 });
 
 userSchema.set("toJSON", {
@@ -66,7 +62,6 @@ function signUp(user) {
       .error(new Error("Please enter a valid email."))
       .required(),
     password: Joi.string().regex(regex).error(passwordError).required(),
-    role: Joi.string().required(),
   });
 
   return schema.validate(user);

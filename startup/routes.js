@@ -11,8 +11,8 @@ module.exports = function (app) {
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
   app.use("/", users);
-  app.use("/cities", cities);
-  app.use("/restaurants", Restaurants);
+  app.use("/city", cities);
+  app.use("/restaurant", Restaurants);
   app.use(errorHandler);
   app.use(serverErrorHandler);
 };

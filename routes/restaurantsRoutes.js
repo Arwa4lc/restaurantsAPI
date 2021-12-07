@@ -11,7 +11,7 @@ router.use(isAdmin);
 router.use(multer);
 
 router.post("/", restaurantController.addRestaurant);
-router.put("/:id", restaurantController.editRestaurant);
+router.patch("/:id", restaurantController.editRestaurant);
 router.delete("/:id", restaurantController.deleteRestaurant);
 
 module.exports = router;
