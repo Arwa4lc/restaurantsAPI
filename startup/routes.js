@@ -10,7 +10,7 @@ module.exports = function (app) {
   app.use(cors());
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
-  app.use("/", users);
+  app.use("/auth", users);
   app.use("/city", cities);
   app.use("/restaurant", Restaurants);
   app.use(errorHandler);
