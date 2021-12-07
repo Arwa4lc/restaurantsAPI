@@ -16,3 +16,4 @@ module.exports = function (app) {
   app.use(errorHandler);
   app.use(serverErrorHandler);
 };
+// heroku git:remote -a restaurantsAPI
